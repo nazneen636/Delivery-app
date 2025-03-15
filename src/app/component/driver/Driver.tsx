@@ -1,9 +1,35 @@
 import Image from "next/image";
 import React from "react";
 import driver_avatar from "../../assets/driver_avatar.png";
-import { FaCar, FaStar } from "react-icons/fa6";
+import {
+  FaCar,
+  FaLocationDot,
+  FaMapLocation,
+  FaPhone,
+  FaStar,
+} from "react-icons/fa6";
 import { BsThreeDotsVertical } from "react-icons/bs";
 
+const driver_cardItem = [
+  {
+    id: 1,
+    icon: <FaCar />,
+    car: "Mercedes-EQE - White - DHR3421H",
+    type: "Loremisum",
+  },
+  {
+    id: 2,
+    icon: <FaPhone />,
+    car: "Mercedes-EQE - White - DHR3421H",
+    type: "Loremisum",
+  },
+  {
+    id: 3,
+    icon: <FaLocationDot />,
+    car: "Mercedes-EQE - White - DHR3421H",
+    type: "Loremisum",
+  },
+];
 const Driver = () => {
   return (
     <div>
@@ -32,23 +58,27 @@ const Driver = () => {
               </div>
             </div>
           </div>
-          <div className="text-white">
+          <div className="text-white mr-4">
             <BsThreeDotsVertical />
           </div>
         </div>
         {/* bottom */}
-        <div className="px-[18px] mt-4">
-          <div className="flex gap-[5px]">
-            <div className="w-[26px] h-[26px] rounded-full bg-white text-gray-600 flex items-center justify-center">
-              <FaCar />
+        <div className="px-[18px] mt-4 flex flex-col gap-6">
+          {driver_cardItem?.map((item) => (
+            <div className="" key={item.id}>
+              <div className="flex gap-[5px]">
+                <div className="w-[26px] h-[26px] rounded-full bg-white text-gray-600 flex items-center justify-center">
+                  {item.icon}
+                </div>
+                <h3 className="text-white poppins font-semibold text-sm">
+                  {item.car}
+                </h3>
+              </div>
+              <p className="text-xs font-medium poppins ml-8 text-white opacity-80">
+                {item.type}
+              </p>
             </div>
-            <h3 className="text-white poppins font-semibold text-sm">
-              Mercedes-EQE - White - DHR3421H
-            </h3>
-          </div>
-          <p className="text-xs font-medium poppins ml-8 text-white opacity-80">
-            Loremisum
-          </p>
+          ))}
         </div>
       </div>
     </div>
