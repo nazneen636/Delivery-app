@@ -6,7 +6,6 @@ import React from "react";
 // import item4 from "../assets/item_4.png";
 // import item5 from "../assets/item_5.png";
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { IoSettings } from "react-icons/io5";
 import { BsFillPostcardFill } from "react-icons/bs";
@@ -44,7 +43,7 @@ const items = [
 const Sidebar = () => {
   const pathName = usePathname();
   return (
-    <div className="bg-black rounded-full h-full px-6 ">
+    <div className="bg-black rounded-full py-[243px] fixed top-8 left-6 px-6 flex flex-col justify-center">
       <ul className="flex flex-col gap-8 items-center justify-center h-full">
         {items.map((item) => (
           <li

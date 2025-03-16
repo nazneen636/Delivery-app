@@ -4,9 +4,7 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue,
 } from "@/components/ui/select";
-import { ChevronDown } from "lucide-react";
 
 export default function CustomDropdown() {
   return (
@@ -17,19 +15,19 @@ export default function CustomDropdown() {
       <SelectContent className="w-24 shadow-lg border rounded-md px-4 py-4">
         <SelectItem
           value="Accept"
-          className="p-2 pb-2 roboto font-bold hover:bg-gray-50 border-b-2 border-b-gray-400"
+          className="p-2 pb-2 roboto font-bold hover:bg-gray-50 border-b-2 border-b-gray-400 text-center"
         >
           Accept
         </SelectItem>
         <SelectItem
           value="Decline"
-          className="p-2 pb-2 roboto font-bold hover:bg-gray-50 border-b-2 border-b-gray-400"
+          className="p-2 pb-2 roboto font-bold hover:bg-gray-50 border-b-2 border-b-gray-400 text-center"
         >
           Decline
         </SelectItem>
         <SelectItem
           value="Detail"
-          className="p-2 pb-2 roboto font-bold hover:bg-gray-50 border-b-2 border-b-gray-400"
+          className="p-2 pb-2 roboto font-bold hover:bg-gray-50 "
         >
           Detail
         </SelectItem>
