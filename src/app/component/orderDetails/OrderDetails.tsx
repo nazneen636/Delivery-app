@@ -1,9 +1,11 @@
 import React from "react";
-import Card from "../../component/orderDetails/Card";
+import Card from "./Card";
+import Card2 from "./Card2";
 const OrderDetails = () => {
   return (
     <div>
       <Card />
+      <Card2 />
     </div>
   );
 };
