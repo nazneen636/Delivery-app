@@ -7,7 +7,7 @@ import { SlCalender } from "react-icons/sl";
 
 const ContactCard = () => {
   return (
-    <div className="w-[388px] bg-black rounded-[40px] pt-3 flex">
+    <div className="w-full bg-black rounded-[40px] pt-3 flex">
       <div className="bg-gradient-to-bl from-black to-[#ffffff] w-fit pb-[18px] rounded-[40px]">
         <div className=" bg-orange py-8 px-7 rounded-[40px] w-full">
           <div className="flex gap-3 items-center">

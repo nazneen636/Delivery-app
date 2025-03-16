@@ -1,8 +1,5 @@
 "use client";
-import Image from "next/image";
 import React, { useState } from "react";
-import driver_avatar from "../../assets/driver_avatar.png";
-import { FaStar } from "react-icons/fa6";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { IoClose } from "react-icons/io5";
 import { GoDotFill } from "react-icons/go";
