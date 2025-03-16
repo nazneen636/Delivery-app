@@ -26,7 +26,7 @@ const available_cardItem = [
     carName: "Pontiac - White - 586 5GX",
     phone: "0903001276",
     location: "Saigon",
-    availabilityCheck: "On the way to destination",
+    availabilityCheck: "Available",
   },
   {
     id: 3,
@@ -37,7 +37,7 @@ const available_cardItem = [
     carName: "Pontiac - White - 586 5GX",
     phone: "0903001276",
     location: "Saigon",
-    availabilityCheck: "On the way to destination",
+    availabilityCheck: "Available",
   },
 ];
 
@@ -53,7 +53,7 @@ const Driver = () => {
           ))}
         </div>
       </div>
-      <div className="max-w-[930px] flex  bg-white rounded-[40px] p-[30px]">
+      <div className=" flex  bg-white rounded-[40px] p-[30px]">
         {/* middle */}
         <MiddleSide />
         {/* right */}

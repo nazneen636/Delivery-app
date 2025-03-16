@@ -5,25 +5,28 @@ import driver_avatar from "../../assets/driver_avatar.png";
 import { FaCar, FaLocationDot, FaPhone, FaStar } from "react-icons/fa6";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { IoClose } from "react-icons/io5";
+import { GoDotFill } from "react-icons/go";
 
 const driver_cardItem = [
   {
     id: 1,
-    icon: <FaCar />,
-    car: "Mercedes-EQE - White - DHR3421H",
-    type: "Loremisum",
+    status: "Package has left Courier Facility",
+    location: "San Francisco, California",
   },
   {
     id: 2,
-    icon: <FaPhone />,
-    car: "Mercedes-EQE - White - DHR3421H",
-    type: "Loremisum",
+    status: "Package arrived at Local Facility",
+    location: "NEW YORK CITY, NEW YORK",
   },
   {
     id: 3,
-    icon: <FaLocationDot />,
-    car: "Mercedes-EQE - White - DHR3421H",
-    type: "Loremisum",
+    status: "Out for Delivery",
+    location: "NEW YORK CITY, NEW YORK",
+  },
+  {
+    id: 4,
+    status: "Delivered",
+    location: "1567 DOVE STREET, NEW YORK CITY, 9888",
   },
 ];
 const Driver = () => {
@@ -77,14 +80,14 @@ const Driver = () => {
               <div className="" key={item.id}>
                 <div className="flex gap-[5px] relative z-20">
                   <div className="w-[26px] h-[26px] rounded-full bg-white text-gray-600 flex items-center justify-center">
-                    {item.icon}
+                    <GoDotFill />
                   </div>
                   <h3 className="text-white poppins font-semibold text-sm">
-                    {item.car}
+                    {item.status}
                   </h3>
                 </div>
                 <p className="text-xs font-medium poppins ml-8 text-white opacity-80">
-                  {item.type}
+                  {item.location}
                 </p>
               </div>
             ))}

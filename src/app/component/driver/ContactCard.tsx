@@ -8,8 +8,8 @@ import { SlCalender } from "react-icons/sl";
 const ContactCard = () => {
   return (
     <div className="w-[388px] bg-black rounded-[40px] pt-3 flex">
-      <div className="bg-gradient-to-bl from-black to-[#ffffff] w-fit pb-[18px] rounded-[44px]">
-        <div className=" bg-orange py-8 px-7 rounded-[44px] w-full">
+      <div className="bg-gradient-to-bl from-black to-[#ffffff] w-fit pb-[18px] rounded-[40px]">
+        <div className=" bg-orange py-8 px-7 rounded-[40px] w-full">
           <div className="flex gap-3 items-center">
             <div className="">
               <Image src={avatar} alt="profile" width={52} height={52} />
@@ -25,7 +25,7 @@ const ContactCard = () => {
         </div>
         <Link
           href="tel:+0903001276"
-          className="mt-3 bg-gradient-to-br from-[#636363] to-[#fff] flex gap-5 items-center text-white rounded-[44px] py-3 px-10 w-fit poppins text-lg mx-4"
+          className="mt-3 bg-gradient-to-br from-[#636363] to-[#fff] flex gap-5 items-center text-white rounded-[40px] py-3 px-10 w-fit poppins text-lg mx-4"
         >
           {" "}
           <FaPhone /> Call

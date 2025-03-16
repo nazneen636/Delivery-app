@@ -91,9 +91,7 @@ export default function TableDemo() {
           {invoices.map((invoice) => (
             <TableRow key={invoice.id}>
               <TableCell className="font-medium">
-                <Link href={`/order-details/${invoice.id}`}>
-                  {invoice.Order}
-                </Link>
+                <Link href={`/order/${invoice.id}`}>{invoice.Order}</Link>
               </TableCell>
               <TableCell>{invoice.Address}</TableCell>
               <TableCell>{invoice.Date}</TableCell>
