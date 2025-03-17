@@ -3,9 +3,10 @@ import { FaPlus } from "react-icons/fa6";
 
 interface AddBtnProps {
   onClick: () => void;
+  btnText: string;
 }
 
-const AddBtn: React.FC<AddBtnProps> = ({ onClick }) => {
+const AddBtn: React.FC<AddBtnProps> = ({ onClick, btnText }) => {
   return (
     <div>
       <button
@@ -13,7 +14,7 @@ const AddBtn: React.FC<AddBtnProps> = ({ onClick }) => {
         className="bg-black py-4 px-[60px] flex gap-1 items-center text-orange rounded-[10px]"
       >
         <FaPlus />
-        <span className="text-orange"> Add order</span>
+        <span className="text-orange"> {btnText}</span>
       </button>
     </div>
   );

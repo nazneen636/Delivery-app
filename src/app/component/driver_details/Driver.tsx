@@ -1,5 +1,5 @@
 import React from "react";
-import DetailsCard from "../driver/DetailsCard";
+import DetailsCard from "./DetailsCard";
 import AvailableCard from "./AvailableCard";
 import avatar from "../../assets/driver_avater2.png"; // Ensure this path is correct
 import RightSide from "./RightSide";

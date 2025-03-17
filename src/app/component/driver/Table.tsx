@@ -8,10 +8,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import Action from "./Received";
 import AddBtn from "../common/AddBtn";
 import { useState } from "react";
-import { OrderModal } from "./OrderModal";
+import { OrderModal } from "../driver/OrderModal";
+import CustomDropdown from "./Action";
 
 const invoices = [
   {
@@ -71,7 +71,7 @@ export default function TableDemo() {
       <div className="flex justify-between">
         <h3 className="roboto font-bold text-[32px]">Orders</h3>
 
-        <AddBtn onClick={() => setModalOpen(true)} btnText="Add Order" />
+        <AddBtn onClick={() => setModalOpen(true)} btnText="Add Driver" />
       </div>
       {modalOpen && (
         <OrderModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
@@ -84,39 +84,21 @@ export default function TableDemo() {
             <TableHead className="">Date</TableHead>
             <TableHead>Time</TableHead>
             <TableHead>Phone</TableHead>
-            <TableHead className="">Received</TableHead>
+            <TableHead className="">Action</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {invoices.map((invoice) => (
             <TableRow key={invoice.id}>
               <TableCell className="font-medium">
-                <Link href={`/order/${invoice.id}`} className="block">
-                  {invoice.Order}
-                </Link>
+                <Link href={`/driver/${invoice.id}`}>{invoice.Order}</Link>
               </TableCell>
+              <TableCell>{invoice.Address}</TableCell>
+              <TableCell>{invoice.Date}</TableCell>
+              <TableCell>{invoice.Time}</TableCell>
+              <TableCell>{invoice.Phone}</TableCell>
               <TableCell>
-                <Link href={`/order/${invoice.id}`} className="block">
-                  {invoice.Address}
-                </Link>
-              </TableCell>
-              <TableCell>
-                <Link href={`/order/${invoice.id}`} className="block">
-                  {invoice.Date}
-                </Link>
-              </TableCell>
-              <TableCell>
-                <Link href={`/order/${invoice.id}`} className="block">
-                  {invoice.Time}
-                </Link>
-              </TableCell>
-              <TableCell>
-                <Link href={`/order/${invoice.id}`} className="block">
-                  {invoice.Phone}
-                </Link>
-              </TableCell>
-              <TableCell className="">
-                <Action />
+                <CustomDropdown invoiceId={invoice.id} />
               </TableCell>
             </TableRow>
           ))}
