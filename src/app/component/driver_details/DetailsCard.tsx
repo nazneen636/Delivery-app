@@ -32,11 +32,11 @@ const Driver = () => {
     <div>
       <div className="relative">
         {close && (
-          <div className="absolute -right-20 top-6 bg-orange rounded-[16px] py-3 px-4 after:absolute after:h-1 after:w-20 after:bg-orange after:-left-16 after:top-1/2 after:translate-y-[-50%]">
+          <div className="absolute md:-right-20 right-2 md:top-6 top-18 z-20 bg-white md:bg-orange rounded-[16px] py-3 px-4 after:-z-20 after:absolute after:h-1 md:after:w-20 after:w-0 after:bg-orange after:-left-16 after:top-1/2 after:translate-y-[-50%]">
             <IoClose className="text-black text-2xl" />
           </div>
         )}
-        <div className="w-[350px] pt-10 pb-5 rounded-[32px] bg-orange relative overflow-hidden">
+        <div className="w-full md:w-[350px] pt-10 pb-5 rounded-[32px] bg-orange relative overflow-hidden">
           <div className="h-[14px] w-full bg-black absolute top-0 left-0 z-20"></div>
           <div className="h-[14px] w-1/3 bg-[#eaa36a] absolute top-0 right-0 z-20"></div>
           {/* top */}

@@ -6,7 +6,7 @@ const Card2 = () => {
   return (
     <div>
       {/* card-1 */}
-      <div className="max-w-[350px] mt-3 pt-10 pb-5 rounded-[32px] bg-white relative overflow-hidden px-4">
+      <div className="w-full md:max-w-[350px] mt-3 pt-10 pb-5 rounded-[32px] bg-white relative overflow-hidden px-4">
         <div className="h-[14px] w-full bg-orange absolute top-0 left-0 z-20"></div>
         <div className="h-[14px] w-1/3 bg-[#eaa36a] absolute top-0 right-0 z-20"></div>
         <div className="">

@@ -68,7 +68,7 @@ export default function TableDemo() {
   const [modalOpen, setModalOpen] = useState(false);
   return (
     <div className="bg-white rounded-[20px] p-7">
-      <div className="flex justify-between">
+      <div className="flex justify-between items-center  mb-5 md:mb-0n">
         <h3 className="roboto font-bold text-[32px]">Orders</h3>
 
         <AddBtn onClick={() => setModalOpen(true)} btnText="Add Driver" />
@@ -97,7 +97,7 @@ export default function TableDemo() {
               <TableCell>{invoice.Date}</TableCell>
               <TableCell>{invoice.Time}</TableCell>
               <TableCell>{invoice.Phone}</TableCell>
-              <TableCell>
+              <TableCell className="w-0 whitespace-nowrap">
                 <CustomDropdown invoiceId={invoice.id} />
               </TableCell>
             </TableRow>

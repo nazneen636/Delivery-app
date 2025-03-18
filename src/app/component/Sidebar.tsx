@@ -43,7 +43,7 @@ const items = [
 const Sidebar = () => {
   const pathName = usePathname();
   return (
-    <div className="bg-black md:rounded-full py-2 px-3 md:py-[243px] fixed md:top-8 md:left-6 left-0 top-0 md:px-6 flex flex-col justify-center w-full md:w-auto">
+    <div className="bg-black md:rounded-full py-2 px-3 md:py-[243px] fixed md:top-8 md:left-6 left-0 top-0 md:px-6 flex flex-col justify-center w-full md:w-auto z-50">
       <ul className="flex md:flex-col md:gap-8 items-center justify-between md:justify-center h-full">
         {items.map((item) => (
           <li

@@ -3,7 +3,7 @@ import Table from "../../component/order/Table";
 
 const page = () => {
   return (
-    <div>
+    <div className="">
       <Table />
     </div>
   );

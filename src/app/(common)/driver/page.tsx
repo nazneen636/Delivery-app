@@ -3,7 +3,7 @@ import Table from "../../component/driver/Table";
 
 const page = () => {
   return (
-    <div>
+    <div className="">
       <Table />
     </div>
   );

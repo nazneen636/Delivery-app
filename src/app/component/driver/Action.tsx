@@ -45,10 +45,10 @@ export default function CustomDropdown({ invoiceId }: { invoiceId: number }) {
   }, []);
 
   return (
-    <div className="relative w-40" ref={dropdownRef}>
+    <div className="relative md:w-40" ref={dropdownRef}>
       {/* Custom Dropdown Trigger */}
       <div
-        className="w-16 h-10 flex items-center justify-between border rounded-md bg-blue-500 text-white font-bold cursor-pointer px-3"
+        className="w-12 h-8 flex items-center justify-between border rounded-md bg-blue-500 text-white font-bold cursor-pointer px-2"
         onClick={toggleDropdown}
       >
         {selected ? "" : ""}
@@ -57,22 +57,22 @@ export default function CustomDropdown({ invoiceId }: { invoiceId: number }) {
 
       {/* Custom Dropdown Menu */}
       {isOpen && (
-        <div className="absolute left-20 top-0 mt-2 bg-white border border-gray-200 rounded-md shadow-lg z-20">
+        <div className="absolute md:left-12 -left-12 top-2  bg-white border border-gray-200 rounded-md shadow-lg z-20">
           <ul className="space-y-2">
             <li
-              className="px-6 py-2 text-black text-center hover:bg-gray-100 cursor-pointer border-b border-gray-300"
+              className="px-6 py-1 text-black text-center hover:bg-gray-100 cursor-pointer border-b border-gray-300"
               onClick={() => handleOptionClick("Accept")}
             >
               Accept
             </li>
             <li
-              className="px-6 py-2 text-black text-center hover:bg-gray-100 cursor-pointer border-b border-gray-300"
+              className="px-6 py-1 text-black text-center hover:bg-gray-100 cursor-pointer border-b border-gray-300"
               onClick={() => handleOptionClick("Decline")}
             >
               Decline
             </li>
             <li
-              className="px-6 py-2 text-black text-center hover:bg-gray-100 cursor-pointer"
+              className="px-6 py-1 text-black text-center hover:bg-gray-100 cursor-pointer"
               onClick={() => handleOptionClick("Detail")}
             >
               Details

@@ -8,30 +8,30 @@ import { Label } from "@/components/ui/label";
 
 export default function ProfileSettings() {
   return (
-    <div className="max-w-3xl mx-auto pt-10 pb-2 px-6 bg-white rounded-[10px] shadow-md">
+    <div className="max-w-3xl mx-auto pt-10 pb-2 px-2 md:px-6 bg-white rounded-[10px] shadow-md">
       <Tabs defaultValue="account">
         <TabsList className="flex pb-1 relative">
           <TabsTrigger
             value="account"
-            className="px-4 py-2 font-medium text-sm relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-[#E0E4EC] data-[state=active]:after:bg-orange data-[state=active]:text-orange data-[state=active]:shadow-none border-0"
+            className="md:px-4 py-2 font-medium text-xs md:text-sm relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-[#E0E4EC] data-[state=active]:after:bg-orange data-[state=active]:text-orange data-[state=active]:shadow-none border-0"
           >
             Account Setting
           </TabsTrigger>
           <TabsTrigger
             value="login"
-            className="px-4 py-2 font-medium text-sm relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-[#E0E4EC] data-[state=active]:after:bg-orange data-[state=active]:text-orange data-[state=active]:shadow-none border-0"
+            className="md:px-4 py-2 font-medium text-xs md:text-sm relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-[#E0E4EC] data-[state=active]:after:bg-orange data-[state=active]:text-orange data-[state=active]:shadow-none border-0"
           >
             Login & Security
           </TabsTrigger>
           <TabsTrigger
             value="notifications"
-            className="px-4 py-2 font-medium text-sm relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-[#E0E4EC] data-[state=active]:shadow-none data-[state=active]:after:bg-orange data-[state=active]:text-orange border-0"
+            className="md:px-4 py-2 font-medium text-xs md:text-sm relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-[#E0E4EC] data-[state=active]:shadow-none data-[state=active]:after:bg-orange data-[state=active]:text-orange border-0"
           >
             Notifications
           </TabsTrigger>
           <TabsTrigger
             value="interface"
-            className="px-4 py-2 font-medium text-sm relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-[#E0E4EC] data-[state=active]:after:bg-orange data-[state=active]:text-orange data-[state=active]:shadow-none border-0"
+            className="md:px-4 py-2 font-medium text-xs md:text-sm relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-[#E0E4EC] data-[state=active]:after:bg-orange data-[state=active]:text-orange data-[state=active]:shadow-none border-0"
           >
             Interface
           </TabsTrigger>

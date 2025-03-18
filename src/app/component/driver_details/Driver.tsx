@@ -43,7 +43,7 @@ const available_cardItem = [
 
 const Driver = () => {
   return (
-    <div className="flex gap-10 w-full">
+    <div className="md:flex gap-10 w-full pt-5 md:pt-0">
       {/* left */}
       <div className="">
         <DetailsCard />
@@ -53,7 +53,7 @@ const Driver = () => {
           ))}
         </div>
       </div>
-      <div className=" flex justify-between bg-white rounded-[40px] p-[30px] w-full">
+      <div className="md:flex justify-between bg-white rounded-[40px] mt-6 md:mt-0 p-4 md:p-[30px] w-full">
         {/* middle */}
         <MiddleSide />
         {/* right */}

@@ -16,7 +16,7 @@ interface Driver {
 
 const AvailableCard: React.FC<{ driver: Driver }> = ({ driver }) => {
   return (
-    <div className="bg-gray-100 rounded-[12px] w-[350px] p-4">
+    <div className="bg-gray-100 rounded-[12px] w-full md:w-[350px] p-4 relative">
       <div className="flex">
         {/* Avatar */}
         <div className="flex flex-col items-center">
@@ -69,7 +69,7 @@ const AvailableCard: React.FC<{ driver: Driver }> = ({ driver }) => {
         </div>
 
         {/* Menu Icon */}
-        <div className="w-6 h-6 rounded-full bg-[#d5deef75] flex items-center justify-center">
+        <div className="absolute right-4 top-4 w-6 h-6 rounded-full bg-[#d5deef75] flex items-center justify-center">
           <BsThreeDots className="text-gray-600" />
         </div>
       </div>

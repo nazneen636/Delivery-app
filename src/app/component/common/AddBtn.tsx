@@ -11,7 +11,7 @@ const AddBtn: React.FC<AddBtnProps> = ({ onClick, btnText }) => {
     <div>
       <button
         onClick={onClick}
-        className="bg-black py-4 px-[60px] flex gap-1 items-center text-orange rounded-[10px]"
+        className="bg-black md:py-4 px-4 py-2 md:px-[60px] flex gap-1 items-center text-orange rounded-[10px]"
       >
         <FaPlus />
         <span className="text-orange"> {btnText}</span>

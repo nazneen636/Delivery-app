@@ -67,8 +67,8 @@ const invoices = [
 export default function TableDemo() {
   const [modalOpen, setModalOpen] = useState(false);
   return (
-    <div className="bg-white rounded-[20px] p-7">
-      <div className="flex justify-between">
+    <div className="bg-white rounded-[20px] p-7 ">
+      <div className="flex justify-between items-center  mb-5 md:mb-0">
         <h3 className="roboto font-bold text-[32px]">Orders</h3>
 
         <AddBtn onClick={() => setModalOpen(true)} btnText="Add Order" />
