@@ -43,11 +43,11 @@ const items = [
 const Sidebar = () => {
   const pathName = usePathname();
   return (
-    <div className="bg-black rounded-full py-[243px] fixed top-8 left-6 px-6 flex flex-col justify-center">
-      <ul className="flex flex-col gap-8 items-center justify-center h-full">
+    <div className="bg-black md:rounded-full py-2 px-3 md:py-[243px] fixed md:top-8 md:left-6 left-0 top-0 md:px-6 flex flex-col justify-center w-full md:w-auto">
+      <ul className="flex md:flex-col md:gap-8 items-center justify-between md:justify-center h-full">
         {items.map((item) => (
           <li
-            className={`px-[17px] py-[14px] rounded-[8px] hover:bg-orange duration-300 transition-all ${
+            className={`px-[17px] md:py-[14px] py-2 rounded-[8px] hover:bg-orange duration-300 transition-all ${
               pathName === item.link ? "bg-orange" : ""
             }`}
             key={item.id}

@@ -29,10 +29,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} h-screen antialiased flex gap-6 w-full`}
       >
-        <div className="mx-6 mb-8">
+        <div className="md:mx-6 md:mb-8">
           <Sidebar />
         </div>
-        <div className="w-full mr-12 ml-24">
+        <div className="w-full md:mr-12 md:ml-24">
           <div className="mt-[26px] mb-[43px]">
             <Topbar />
           </div>
