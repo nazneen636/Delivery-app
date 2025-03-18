@@ -1,5 +1,5 @@
 import React from "react";
-import DetailsCard from "../driver/DetailsCard";
+import DetailsCard from "./DetailsCard";
 import AvailableCard from "./AvailableCard";
 import avatar from "../../assets/driver_avater2.png"; // Ensure this path is correct
 import RightSide from "./RightSide";
@@ -26,7 +26,7 @@ const available_cardItem = [
     carName: "Pontiac - White - 586 5GX",
     phone: "0903001276",
     location: "Saigon",
-    availabilityCheck: "On the way to destination",
+    availabilityCheck: "Available",
   },
   {
     id: 3,
@@ -37,13 +37,13 @@ const available_cardItem = [
     carName: "Pontiac - White - 586 5GX",
     phone: "0903001276",
     location: "Saigon",
-    availabilityCheck: "On the way to destination",
+    availabilityCheck: "Available",
   },
 ];
 
 const Driver = () => {
   return (
-    <div className="flex gap-10">
+    <div className="flex gap-10 w-full">
       {/* left */}
       <div className="">
         <DetailsCard />
@@ -53,7 +53,7 @@ const Driver = () => {
           ))}
         </div>
       </div>
-      <div className="max-w-[930px] flex  bg-white rounded-[40px] p-[30px]">
+      <div className=" flex justify-between bg-white rounded-[40px] p-[30px] w-full">
         {/* middle */}
         <MiddleSide />
         {/* right */}

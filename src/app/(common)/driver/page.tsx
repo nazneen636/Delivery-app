@@ -1,9 +1,10 @@
 import React from "react";
-import Driver from "../../component/driver/Driver";
+import Table from "../../component/driver/Table";
+
 const page = () => {
   return (
     <div>
-      <Driver />
+      <Table />
     </div>
   );
 };

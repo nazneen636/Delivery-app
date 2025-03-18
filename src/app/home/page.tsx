@@ -15,7 +15,7 @@ import { FaAngleDown } from "react-icons/fa6";
 
 
 
-const page = () => {
+const HomePage = () => {
 
   
 
@@ -245,4 +245,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default HomePage;

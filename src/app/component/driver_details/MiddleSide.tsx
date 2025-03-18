@@ -8,7 +8,7 @@ import document2 from "../../assets/documents2.png";
 
 const MiddleSide = () => {
   return (
-    <div className="mt-[71px] ml-4 mr-11 ">
+    <div className="mt-[71px] ml-10 mr-11 ">
       <div className="flex justify-between">
         <div className="flex gap-4">
           <Image
@@ -19,7 +19,7 @@ const MiddleSide = () => {
             className="rounded-full"
           />
 
-          <div className="">
+          <div className="ml-4">
             <h2 className="roboto text-lg font-semibold">Loki Bright</h2>
             <p className="roboto text-xs text-gray-600">
               experience{" "}
@@ -41,7 +41,7 @@ const MiddleSide = () => {
         </div>
       </div>
       {/*  */}
-      <div className="mt-[30px] ml-[70px] flex flex-col gap-11 px-10">
+      <div className="mt-[30px] ml-[50px] flex flex-col gap-11 px-10">
         <div className="flex">
           <span className="roboto text-2xl text-gray-600 w-[180px] inline-block">
             Address{" "}
