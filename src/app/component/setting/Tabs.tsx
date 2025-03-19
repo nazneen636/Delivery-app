@@ -1,3 +1,4 @@
+"use client";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -5,8 +6,28 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Upload } from "lucide-react";
 import { Label } from "@/components/ui/label";
+import { useRef, useState } from "react";
+import Image from "next/image";
 
 export default function ProfileSettings() {
+  const [profileImage, setProfileImage] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setProfileImage(e.target?.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleUploadClick = () => {
+    fileInputRef.current?.click();
+  };
+
   return (
     <div className="max-w-3xl  pt-10 pb-2 px-2 md:px-6 bg-white rounded-[10px] shadow-md -mx-2 md:mx-0">
       <Tabs defaultValue="account">
@@ -44,10 +65,53 @@ export default function ProfileSettings() {
                 <label className="block text-sm font-medium text-gray-700">
                   Your Profile Picture
                 </label>
-                <div className="mt-2 flex items-center gap-4">
-                  <button className="w-24 h-24 flex items-center justify-center border-2 border-dashed rounded-lg text-gray-500 hover:text-gray-700">
-                    <Upload className="w-6 h-6" />
-                  </button>
+                <div className="mt-2">
+                  {/* Hidden file input */}
+                  <input
+                    type="file"
+                    ref={fileInputRef}
+                    onChange={handleFileChange}
+                    accept="image/*"
+                    className="hidden"
+                  />
+
+                  {/* Profile image display */}
+                  {profileImage ? (
+                    <div
+                      onClick={handleUploadClick}
+                      className="w-32 h-32 border-2 border-dashed border-[#E0E4EC] rounded-lg flex flex-col items-center justify-center cursor-pointer hover:border-orange transition-colors"
+                    >
+                      <Image
+                        src={profileImage || "/placeholder.svg"}
+                        alt="Profile"
+                        width={300}
+                        height={300}
+                        className="w-full h-full object-cover rounded-lg"
+                      />
+                    </div>
+                  ) : (
+                    <div
+                      onClick={handleUploadClick}
+                      className="w-32 h-32 border-2 border-dashed border-[#E0E4EC] rounded-lg flex flex-col items-center justify-center cursor-pointer hover:border-orange transition-colors"
+                    >
+                      <svg
+                        className="w-8 h-8 text-gray-400 mb-2"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2z"></path>
+                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                        <polyline points="21 15 16 10 5 21"></polyline>
+                      </svg>
+                      <span className="text-xs text-gray-500">
+                        Upload your photo
+                      </span>
+                    </div>
+                  )}
                 </div>
               </div>
 
