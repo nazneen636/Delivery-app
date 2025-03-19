@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 
 export default function ProfileSettings() {
   return (
-    <div className="max-w-3xl mx-auto pt-10 pb-2 px-2 md:px-6 bg-white rounded-[10px] shadow-md">
+    <div className="max-w-3xl  pt-10 pb-2 px-2 md:px-6 bg-white rounded-[10px] shadow-md -mx-2 md:mx-0">
       <Tabs defaultValue="account">
         <TabsList className="flex pb-1 relative">
           <TabsTrigger

@@ -16,7 +16,7 @@ const items = [
   {
     id: 1,
     icon: <BiCategory />,
-    link: "/home",
+    link: "/",
   },
   {
     id: 2,
