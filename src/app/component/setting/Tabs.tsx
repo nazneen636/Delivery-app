@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { Upload } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { useRef, useState } from "react";
 import Image from "next/image";
