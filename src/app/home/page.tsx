@@ -6,15 +6,79 @@ import { GoArrowUpRight } from "react-icons/go";
 import { AiOutlineDollar } from "react-icons/ai";
 import { TfiStatsUp } from "react-icons/tfi";
 import BarChartComponent from "@/components/BarChartComponent/BarChartComponent";
-import TimeBar from "@/components/Timebar/Timebar";
 import { TbCar } from "react-icons/tb";
-import VerticalTimeline from "@/components/VerticalTimeline/VerticalTimeline";
-import ProgressCircle from "@/components/ProgressCircle/ProgressCircle";
 import { FaAngleDown } from "react-icons/fa6";
+import { Separator } from "@/components/ui/separator";
 
 const HomePage = () => {
+  const TimeBar = () => {
+    return (
+      <div className="w-full">
+        <div className="flex justify-between mb-1">
+          <span className="text-xs text-[#929292]">12:00</span>
+          <span className="text-xs text-[#929292]">13:41</span>
+        </div>
+        <div className="h-1 w-full bg-[#333333] rounded-full">
+          <div
+            className="h-1 bg-white rounded-full"
+            style={{ width: "60%" }}
+          ></div>
+        </div>
+      </div>
+    );
+  };
+
+  const VerticalTimeline = () => {
+    return (
+      <div className="flex flex-col space-y-4 py-2">
+        <div className="flex items-center">
+          <div className="w-3 h-3 rounded-full bg-red-500 mr-3"></div>
+          <span className="flex-grow">Checking</span>
+          <span className="text-sm">16:56</span>
+        </div>
+        <div className="flex items-center">
+          <div className="w-3 h-3 rounded-full border border-gray-400 mr-3"></div>
+          <span className="flex-grow text-gray-600">Sent to you</span>
+          <span className="text-sm text-gray-600">12:30</span>
+        </div>
+      </div>
+    );
+  };
+
+  const ProgressCircle = ({ value }: { value: number }) => {
+    return (
+      <div className="relative w-16 h-16 flex items-center justify-center">
+        <svg className="w-full h-full" viewBox="0 0 100 100">
+          <circle
+            className="text-gray-200"
+            strokeWidth="10"
+            stroke="currentColor"
+            fill="transparent"
+            r="40"
+            cx="50"
+            cy="50"
+          />
+          <circle
+            className="text-[#FFA500]"
+            strokeWidth="10"
+            strokeDasharray={251.2}
+            strokeDashoffset={251.2 - (251.2 * value) / 100}
+            strokeLinecap="round"
+            stroke="currentColor"
+            fill="transparent"
+            r="40"
+            cx="50"
+            cy="50"
+          />
+        </svg>
+        <div className="absolute flex flex-col items-center justify-center text-center">
+          <span className="text-sm font-semibold">{value}%</span>
+        </div>
+      </div>
+    );
+  };
   return (
-    <div className="w-full grid grid-cols-1 xl:grid-cols-7  md:gap-5 my-8 pt-6 md:pt-0  md:mx-8 ">
+    <div className="w-full grid grid-cols-1 xl:grid-cols-7 gap-3 md:gap-5 my-8 pt-6 md:pt-0  md:mx-8 ">
       <div className="bg-[#FFFFFF] p-5.5 rounded-2xl flex flex-col justify-between col-span-2 h-[278px]">
         <div className="flex justify-between items-center ">
           <h2 className="text-[24px] font-semibold jarkata">New Delivery</h2>
@@ -37,15 +101,19 @@ const HomePage = () => {
       <div className=" bg-[#FFFFFF] p-5.5  rounded-2xl flex justify-between col-span-3 h-[278px]  ">
         <div className="flex flex-col justify-between">
           <div>
-            <h2 className="text-[24px] font-semibold">savings this month</h2>
+            <h2 className="text-base md:text-[24px] font-semibold capitalize text-nowrap">
+              savings this month
+            </h2>
             <div className="flex gap-2.5 items-center mt-5 ">
               <AiOutlineDollar className="text-4xl text-[#E97A20]"></AiOutlineDollar>
-              <h2 className="text-[24px] font-semibold">$1,806</h2>
+              <h2 className="text-base md:text-[24px] font-semibold">$1,806</h2>
             </div>
           </div>
           <div className="flex gap-2.5 items-center">
-            <TfiStatsUp className="text-4xl text-[#E97A20]"></TfiStatsUp>
-            <h2 className="text-[22px] font-semibold text-[#E97A20]">3.5%</h2>
+            <TfiStatsUp className="text-base md:text-4xl text-[#E97A20]"></TfiStatsUp>
+            <h2 className="text-base md:text-[22px] font-semibold text-[#E97A20]">
+              3.5%
+            </h2>
           </div>
         </div>
         <div className="flex items-center">
@@ -117,20 +185,20 @@ const HomePage = () => {
 
       {/* 5 number div  */}
 
-      <div className=" bg-[#F0F0F0] p-5.5  rounded-2xl col-span-3 h-[511px]">
-        <div className="flex justify-between items-center ">
+      <div className="bg-[#F0F0F0] p-5.5 rounded-2xl col-span-3 h-auto md:h-[511px] flex flex-col">
+        <div className="flex justify-between items-center">
           <h2 className="text-[24px] font-semibold">Tracking</h2>
           <h2 className="text-[24px] font-semibold">640 km</h2>
         </div>
 
-        <div className="flex md:flex-row flex-col justify-between items-center gap-3.5 mt-14">
-          <div className="bg-[#000000] rounded-2xl p-6 h-[254px] flex flex-col justify-between w-full md:w-1/2">
+        <div className="flex flex-col md:flex-row justify-between items-stretch gap-3.5 mt-8 md:mt-14 flex-1">
+          <div className="bg-[#000000] rounded-2xl p-4 md:p-6 flex flex-col justify-between w-full min-h-[200px] md:min-h-0">
             <div className="flex justify-between">
               <p className="font-medium text-[20px] text-[#ffffff]">NYC</p>
               <p className="font-medium text-[20px] text-[#ffffff]">BOS</p>
             </div>
 
-            <div className="flex flex-col justify-center items-center ">
+            <div className="flex flex-col justify-center items-center py-4">
               <TbCar className="font-medium text-[20px] text-[#ffffff] mb-1.5"></TbCar>
               <div>
                 <span className="text-[13px] text-[#929292] font-medium">
@@ -142,7 +210,7 @@ const HomePage = () => {
             <TimeBar></TimeBar>
           </div>
 
-          <div className="text-[#000000] bg-[#FFFFFF] rounded-2xl p-6 h-[254px] flex flex-col justify-between w-full md:w-1/2">
+          <div className="text-[#000000] bg-[#FFFFFF] rounded-2xl p-4 md:p-6 flex flex-col justify-between w-full min-h-[200px] md:min-h-0">
             <p className="font-medium text-[20px] text-[#000000]">
               #1275896-LD-NY
             </p>
@@ -150,7 +218,26 @@ const HomePage = () => {
           </div>
         </div>
 
-        <div className="mt-10 bg-[#FFFFFF] py-3.5 px-3.5 rounded-full grid grid-cols-2 items-center">
+        <div className="mt-6 md:mt-10 mb-2 bg-[#FFFFFF] py-3 md:py-3.5 px-3 md:px-3.5 rounded-full">
+          <div className="flex flex-row items-center justify-between ">
+            <div className="w-1/2 sm:w-auto flex justify-between gap-3 items-center sm:justify-start py-2 sm:py-0">
+              <ProgressCircle value={75} />
+              <span className="text-xs md:text-base font-semibold jarkata">
+                75% Completed
+              </span>
+            </div>
+            <Separator orientation="vertical" />
+            <div className="w-1/2 pl-3.5 flex items-center justify-between">
+              <span className="text-[#929292] text-xs md:text-base font-medium ">
+                Deliveries
+              </span>
+              <FaAngleDown className="mr-8 text-[#929292]"></FaAngleDown>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/*  <div className="mt-10 bg-[#FFFFFF] py-3.5 px-3.5 rounded-full grid grid-cols-2 items-center">
           <ProgressCircle value={75} />
 
           <div className="border-l-2 border-gray-200 pl-3.5 flex justify-between items-center">
@@ -159,8 +246,7 @@ const HomePage = () => {
             </span>
             <FaAngleDown className="mr-8 text-[#929292]"></FaAngleDown>
           </div>
-        </div>
-      </div>
+        </div> */}
 
       {/* 6 number div  */}
 
