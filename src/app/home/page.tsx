@@ -122,32 +122,26 @@ const HomePage = () => {
       </div>
 
       <div className="flex flex-col justify-between col-span-2 h-[278px]">
-        <div className="flex justify-center bg-[#ffffff] p-5.5 rounded-2xl gap-10 py-8 ">
+        {/* Tow Truck Deliveries */}
+        <div className="flex justify-center items-center bg-[#ffffff] p-5.5 rounded-2xl gap-10 py-8">
           <div>
-            <h2 className="font-semibold text-[#000000] text-[46.47px] ">
-              139
-            </h2>
+            <h2 className="font-semibold text-[#000000] text-[46.47px]">139</h2>
           </div>
-
           <div className="flex flex-col">
-            <span className="text-[20px] font-[500]">Total delivery</span>
-            <span className="text-[20px] font-[500]">packages</span>
+            <span className="text-[20px] font-[500]">
+              Total Tow Truck Deliveries
+            </span>
           </div>
         </div>
 
-        <div className="flex justify-center bg-[#000000] p-5.5 rounded-2xl gap-10 py-8 ">
+        {/* Package Deliveries */}
+        <div className="flex justify-center items-center bg-[#000000] p-5.5 rounded-2xl gap-10 py-8">
           <div>
-            <h2 className="font-semibold text-[#ffffff] text-[46.47px] ">
-              268
-            </h2>
+            <h2 className="font-semibold text-[#ffffff] text-[46.47px]">168</h2>
           </div>
-
           <div className="flex flex-col">
             <span className="text-[20px] font-[500] text-[#ffffff]">
-              Total delivery
-            </span>
-            <span className="text-[20px] font-[500] text-[#ffffff]">
-              packages
+              Total Package Deliveries
             </span>
           </div>
         </div>
@@ -236,18 +230,6 @@ const HomePage = () => {
           </div>
         </div>
       </div>
-
-      {/*  <div className="mt-10 bg-[#FFFFFF] py-3.5 px-3.5 rounded-full grid grid-cols-2 items-center">
-          <ProgressCircle value={75} />
-
-          <div className="border-l-2 border-gray-200 pl-3.5 flex justify-between items-center">
-            <span className="text-[#929292] text-[16px] font-medium ">
-              Deliveries
-            </span>
-            <FaAngleDown className="mr-8 text-[#929292]"></FaAngleDown>
-          </div>
-        </div> */}
-
       {/* 6 number div  */}
 
       <div className="flex flex-col gap-2.5 col-span-2  h-[511px]">

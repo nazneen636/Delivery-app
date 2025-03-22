@@ -10,20 +10,20 @@ const driver_cardItem = [
   {
     id: 1,
     icon: <FaCar />,
-    car: "Mercedes-EQE - White - DHR3421H",
-    type: "Loremisum",
+    label: "Mercedes-EQE - White - DHR3421H",
+    location: "Loremisum",
   },
   {
     id: 2,
     icon: <FaPhone />,
-    car: "Mercedes-EQE - White - DHR3421H",
-    type: "Loremisum",
+    label: "0903001276",
+    location: "NEW YORK CITY, NEW YORK",
   },
   {
     id: 3,
     icon: <FaLocationDot />,
-    car: "Mercedes-EQE - White - DHR3421H",
-    type: "Loremisum",
+    label: "Saigon",
+    location: "NEW YORK CITY, NEW YORK",
   },
 ];
 const Driver = () => {
@@ -80,11 +80,11 @@ const Driver = () => {
                     {item.icon}
                   </div>
                   <h3 className="text-white poppins font-semibold text-sm">
-                    {item.car}
+                    {item.label}
                   </h3>
                 </div>
                 <p className="text-xs font-medium poppins ml-8 text-white opacity-80">
-                  {item.type}
+                  {item.location}
                 </p>
               </div>
             ))}

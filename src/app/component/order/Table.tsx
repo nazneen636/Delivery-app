@@ -20,6 +20,7 @@ const invoices = [
     Date: "Thus, 20-02-2025",
     Time: "15:00 14:00",
     Phone: "+90345354334",
+    Type: "tow-truck",
     received: "Yes",
   },
   {
@@ -29,6 +30,7 @@ const invoices = [
     Date: "Thus, 20-02-2025",
     Time: "15:00 14:00",
     Phone: "+90345354334",
+    Type: "delivery",
     received: "No",
   },
   {
@@ -38,6 +40,7 @@ const invoices = [
     Date: "Thus, 20-02-2025",
     Time: "15:00 14:00",
     Phone: "+90345354334",
+    Type: "delivery",
     received: "Yes",
   },
   {
@@ -47,6 +50,7 @@ const invoices = [
     Date: "Thus, 20-02-2025",
     Time: "15:00 14:00",
     Phone: "+90345354334",
+    Type: "tow-truck",
     received: "No",
   },
   {
@@ -56,6 +60,7 @@ const invoices = [
     Date: "Thus, 20-02-2025",
     Time: "15:00 14:00",
     Phone: "+90345354334",
+    Type: "tow-truck",
     received: "Yes",
   },
   {
@@ -65,6 +70,7 @@ const invoices = [
     Date: "Thus, 20-02-2025",
     Time: "15:00 14:00",
     Phone: "+90345354334",
+    Type: "tow-truck",
     received: "No",
   },
 ];
@@ -89,6 +95,7 @@ export default function TableDemo() {
             <TableHead className="">Date</TableHead>
             <TableHead>Time</TableHead>
             <TableHead>Phone</TableHead>
+            <TableHead>Type</TableHead>
             <TableHead className="">Received</TableHead>
           </TableRow>
         </TableHeader>
@@ -119,6 +126,9 @@ export default function TableDemo() {
                 <Link href={`/order/${invoice.id}`} className="block">
                   {invoice?.Phone}
                 </Link>
+              </TableCell>
+              <TableCell>
+                {invoice.Type === "tow-truck" ? "Tow Truck" : "Delivery"}
               </TableCell>
               <TableCell className="">
                 <span className="rounded-md bg-blue-500 text-white px-4 py-2 text-sm">

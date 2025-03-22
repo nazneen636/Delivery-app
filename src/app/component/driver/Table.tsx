@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import Link from "next/link";
 import {
   Table,
@@ -8,83 +9,170 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Button } from "@/components/ui/button";
 import AddBtn from "../common/AddBtn";
-import { useState } from "react";
-import { OrderModal } from "../driver/OrderModal";
+import { OrderModal } from "./OrderModal";
 import CustomDropdown from "./Action";
+import { PricingModal } from "./PricingModal"; // Import the modal
 
-const invoices = [
+type Invoice = {
+  id: number;
+  Order: string;
+  Address: string;
+  Date: string;
+  Time: string;
+  Phone: string;
+  Type: string;
+  distance?: number;
+  price: number;
+  packageType?: string;
+  boxCount?: number;
+};
+
+const invoices: Invoice[] = [
   {
-    id: 1, // Added a unique ID for each invoice
+    id: 1,
     Order: "Begum Vocks",
     Address: "Meeting hall 1",
     Date: "Thus, 20-02-2025",
-    Time: "15:00 14:00",
+    Time: "15:00",
     Phone: "+90345354334",
+    Type: "tow-truck",
+    distance: 15, // 15 km
+    price: 15.0, // 15 km × 1 AED/km = 15 AED
   },
   {
-    id: 2, // Unique ID for this invoice
-    Order: "Begum Vocks",
-    Address: "Meeting hall 1",
-    Date: "Thus, 20-02-2025",
-    Time: "15:00 14:00",
-    Phone: "+90345354334",
+    id: 2,
+    Order: "John Smith",
+    Address: "Downtown Office",
+    Date: "Thus, 21-02-2025",
+    Time: "14:00",
+    Phone: "+90345354335",
+    Type: "delivery",
+    packageType: "normal",
+    boxCount: 2, // 2 boxes
+    price: 50.0, // 2 boxes × 25 AED/box = 50 AED
   },
   {
-    id: 3, // Unique ID for this invoice
-    Order: "Begum Vocks",
-    Address: "Meeting hall 1",
-    Date: "Thus, 20-02-2025",
-    Time: "15:00 14:00",
-    Phone: "+90345354334",
+    id: 3,
+    Order: "Sarah Johnson",
+    Address: "Marina Residence",
+    Date: "Thus, 22-02-2025",
+    Time: "16:30",
+    Phone: "+90345354336",
+    Type: "delivery",
+    packageType: "emergency",
+    boxCount: 1, // 1 box
+    price: 50.0, // 1 box × 50 AED/box = 50 AED
   },
   {
-    id: 4, // Unique ID for this invoice
-    Order: "Begum Vocks",
-    Address: "Meeting hall 1",
-    Date: "Thus, 20-02-2025",
-    Time: "15:00 14:00",
-    Phone: "+90345354334",
+    id: 4,
+    Order: "Ahmed Hassan",
+    Address: "Business Bay",
+    Date: "Thus, 23-02-2025",
+    Time: "08:00", // Morning time (after midnight)
+    Phone: "+90345354337",
+    Type: "delivery",
+    packageType: "emergency",
+    boxCount: 2, // 2 boxes
+    price: 300.0, // 2 boxes × 150 AED/box = 300 AED (midnight emergency)
   },
   {
-    id: 5, // Unique ID for this invoice
-    Order: "Begum Vocks",
-    Address: "Meeting hall 1",
-    Date: "Thus, 20-02-2025",
-    Time: "15:00 14:00",
-    Phone: "+90345354334",
+    id: 5,
+    Order: "Michael Chen",
+    Address: "Silicon Oasis",
+    Date: "Thus, 24-02-2025",
+    Time: "10:00",
+    Phone: "+90345354338",
+    Type: "tow-truck",
+    distance: 25, // 25 km
+    price: 25.0, // 25 km × 1 AED/km = 25 AED
   },
   {
-    id: 6, // Unique ID for this invoice
-    Order: "Begum Vocks",
-    Address: "Meeting hall 1",
-    Date: "Thus, 20-02-2025",
-    Time: "15:00 14:00",
-    Phone: "+90345354334",
+    id: 6,
+    Order: "Lisa Wong",
+    Address: "Palm Jumeirah",
+    Date: "Thus, 25-02-2025",
+    Time: "13:00",
+    Phone: "+90345354339",
+    Type: "delivery",
+    packageType: "normal",
+    boxCount: 5, // 5 boxes
+    price: 125.0, // 5 boxes × 25 AED/box = 125 AED
   },
 ];
 
 export default function TableDemo() {
   const [modalOpen, setModalOpen] = useState(false);
+  const [pricingModalOpen, setPricingModalOpen] = useState(false);
+
+  // getPriceDetails function
+  const getPriceDetails = (invoice: Invoice) => {
+    const boxPrice = invoice.packageType === "normal" ? 25.0 : 50.0;
+    const totalPrice = boxPrice * (invoice.boxCount || 1);
+
+    if (invoice.Type === "tow-truck") {
+      return `${invoice.price.toFixed(2)} (AED ${
+        invoice.distance
+      } km × AED 1.00/km)`;
+    } else {
+      const [hour] = invoice.Time.split(":").map(Number);
+      const isEmergencyAfterMidnight =
+        invoice.packageType === "emergency" && hour < 12;
+      if (isEmergencyAfterMidnight) {
+        return `150.00 (Emergency after midnight)`;
+      }
+      return `${totalPrice.toFixed(2)} (${
+        invoice.boxCount || 1
+      } box(es) × AED ${boxPrice} per box)`;
+    }
+  };
+
   return (
     <div className="bg-white rounded-[20px] p-7">
-      <div className="flex justify-between items-center  mb-5 md:mb-0n">
-        <h3 className="roboto font-bold text-[32px]">Orders</h3>
-
-        <AddBtn onClick={() => setModalOpen(true)} btnText="Add Driver" />
+      <div className="flex flex-col md:flex-row justify-between md:items-center mb-5 md:mb-0">
+        <h3 className="roboto font-bold text-[32px]">Drivers</h3>
+        <div className="flex justify-between gap-3 mt-2 md:mt-0">
+          <Button
+            onClick={() => setPricingModalOpen(true)}
+            className="bg-white border-orange border md:py-6 py-5 text-base md:px-16 px-4 text-orange rounded-[10px] cursor-pointer hover:bg-orange hover:text-white"
+          >
+            Pricing Settings
+          </Button>
+          <AddBtn onClick={() => setModalOpen(true)} btnText="Add Driver" />
+        </div>
       </div>
+
       {modalOpen && (
         <OrderModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
       )}
-      <Table className="">
+      {pricingModalOpen && (
+        <PricingModal
+          isOpen={pricingModalOpen}
+          onClose={() => setPricingModalOpen(false)}
+          initialPrices={{
+            towTruckRate: 1.0,
+            normalDeliveryRate: 25.0,
+            emergencyDeliveryRate: 50.0,
+            midnightEmergencyRate: 150.0,
+          }} // Provide appropriate initial prices
+          onSave={() => {
+            // Handle save logic here
+          }}
+        />
+      )}
+
+      <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="">Order</TableHead>
-            <TableHead className="">Address</TableHead>
-            <TableHead className="">Date</TableHead>
+            <TableHead>Order</TableHead>
+            <TableHead>Address</TableHead>
+            <TableHead>Date</TableHead>
             <TableHead>Time</TableHead>
             <TableHead>Phone</TableHead>
-            <TableHead className="">Action</TableHead>
+            <TableHead>Type</TableHead>
+            <TableHead>Price (AED)</TableHead>
+            <TableHead>Action</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -97,6 +185,27 @@ export default function TableDemo() {
               <TableCell>{invoice.Date}</TableCell>
               <TableCell>{invoice.Time}</TableCell>
               <TableCell>{invoice.Phone}</TableCell>
+              <TableCell>
+                {invoice.Type === "tow-truck" ? "Tow Truck" : "Delivery"}
+              </TableCell>
+              <TableCell>
+                <div className="relative group z-30">
+                  <span className="font-bold flex gap-1 items-center">
+                    {invoice.price.toFixed(2)}
+                  </span>
+                  <div className="absolute left-0 bottom-0 w-24 md:w-full bg-white p-3 text-gray-600 border border-gray-300 rounded-md opacity-0 group-hover:opacity-100 transition-opacity text-wrap">
+                    <span className="text-xs md:text-sm z-30">
+                      {getPriceDetails(invoice)}
+                    </span>
+                    {invoice.packageType === "emergency" && (
+                      <span className="text-xs md:text-sm text-red-500 font-normal">
+                        {" "}
+                        (Emergency package)
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </TableCell>
               <TableCell className="w-0 whitespace-nowrap">
                 <CustomDropdown invoiceId={invoice.id} />
               </TableCell>

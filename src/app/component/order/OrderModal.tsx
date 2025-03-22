@@ -1,15 +1,16 @@
-
-import { Button } from "@/components/ui/button";
+"use client";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import type React from "react";
+
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useState } from "react";
 
 interface OrderModalProps {
   isOpen: boolean;
@@ -17,52 +18,90 @@ interface OrderModalProps {
 }
 
 export function OrderModal({ isOpen, onClose }: OrderModalProps) {
+  const [formData, setFormData] = useState({
+    order: "",
+    address: "",
+    date: "",
+    time: "",
+    phone: "",
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Handle form submission logic here
+    console.log(formData);
+    onClose();
+  };
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Order Details</DialogTitle>
-          <DialogDescription>
-            Fill in the order details below.
-          </DialogDescription>
+          <DialogTitle>Add New Order</DialogTitle>
         </DialogHeader>
-        <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="order" className="text-right">
-              Order
-            </Label>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="grid gap-2">
+            <Label htmlFor="order">Order</Label>
             <Input
               id="order"
+              name="order"
+              value={formData.order}
+              onChange={handleChange}
               placeholder="Enter order name"
-              className="col-span-3"
             />
           </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="address" className="text-right">
-              Address
-            </Label>
+          <div className="grid gap-2">
+            <Label htmlFor="address">Address</Label>
             <Input
               id="address"
+              name="address"
+              value={formData.address}
+              onChange={handleChange}
               placeholder="Enter address"
-              className="col-span-3"
             />
           </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="address" className="text-right">
-              Phone
-            </Label>
+          <div className="grid gap-2">
+            <Label htmlFor="date">Date</Label>
             <Input
-              type="number"
-              id="address"
-              placeholder="Enter your Phone no"
-              className="col-span-3"
+              id="date"
+              name="date"
+              type="date"
+              value={formData.date}
+              onChange={handleChange}
             />
           </div>
-        </div>
-        <DialogFooter>
-          <Button onClick={onClose}>Close</Button>
-          <Button type="submit">Submit</Button>
-        </DialogFooter>
+          <div className="grid gap-2">
+            <Label htmlFor="time">Time</Label>
+            <Input
+              id="time"
+              name="time"
+              type="time"
+              value={formData.time}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="phone">Phone</Label>
+            <Input
+              id="phone"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              placeholder="Enter phone number"
+            />
+          </div>
+          <div className="flex justify-end gap-2">
+            <Button type="button" variant="outline" onClick={onClose}>
+              Cancel
+            </Button>
+            <Button type="submit">Save Order</Button>
+          </div>
+        </form>
       </DialogContent>
     </Dialog>
   );
