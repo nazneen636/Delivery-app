@@ -1,11 +1,16 @@
-import React from 'react'
-import CardPage from '../component/cardPage/CardPage'
+import React from "react";
+import CardPage from "../component/cardPage/CardPage";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Card",
+};
 const page = () => {
   return (
     <div>
-      <CardPage/>
+      <CardPage />
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;

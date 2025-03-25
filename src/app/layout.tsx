@@ -1,9 +1,30 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import {
+  Geist,
+  Geist_Mono,
+  Plus_Jakarta_Sans,
+  Poppins,
+  Roboto,
+} from "next/font/google";
 import "./globals.css";
 import Sidebar from "./component/Sidebar";
 import Topbar from "./component/Topbar";
 
+const poppins = Poppins({
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+  display: "swap",
+});
+const jarkata = Plus_Jakarta_Sans({
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+  display: "swap",
+});
+const roboto = Roboto({
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+  display: "swap",
+});
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -27,7 +48,7 @@ export default function RootLayout({
   return (
     <html lang="en" className=" w-full">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} h-screen antialiased md:flex gap-6 w-full relative`}
+        className={`${geistSans.variable} ${geistMono.variable} ${poppins.className} ${jarkata.className} ${roboto.className} h-screen antialiased md:flex gap-6 w-full relative`}
       >
         <div className="md:mx-6 md:mb-8">
           <Sidebar />
