@@ -46,7 +46,7 @@ export function PricingModal({
     initialPrices.midnightEmergencyRate.toFixed(2)
   );
   const [isSubmitting, setIsSubmitting] = useState(false);
-
+  const [numberOfTrucks, setNumberOfTrucks] = useState("1");
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -75,13 +75,23 @@ export function PricingModal({
         <form onSubmit={handleSave}>
           <Tabs defaultValue="tow-truck">
             <TabsList>
-              <TabsTrigger value="tow-truck">Tow Truck</TabsTrigger>
-              <TabsTrigger value="delivery">Delivery</TabsTrigger>
+              {/* <TabsTrigger value="tow-truck">Tow Truck</TabsTrigger>
+              <TabsTrigger value="delivery">Delivery</TabsTrigger> */}
             </TabsList>
             <TabsContent value="tow-truck">
               <div className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="towTruckRate">Price per km (AED)</Label>
+                  <Label htmlFor="numberOfTrucks">Number of Trucks</Label>
+                  <Input
+                    id="numberOfTrucks"
+                    value={numberOfTrucks}
+                    onChange={(e) => setNumberOfTrucks(e.target.value)}
+                    type="number"
+                    min="1"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="towTruckRate">Price per km (UAE)</Label>
                   <Input
                     id="towTruckRate"
                     value={towTruckRate}
@@ -90,14 +100,29 @@ export function PricingModal({
                     step="0.01"
                     min="0"
                   />
+                  <p className="text-sm text-muted-foreground">
+                    {parseInt(numberOfTrucks) >= 2
+                      ? `Final price after 35% discount (2 or more trucks): `
+                      : `Final price (no discount): `}
+                    <span className="font-medium text-primary">
+                      {towTruckRate && !isNaN(parseFloat(towTruckRate))
+                        ? (
+                            parseFloat(towTruckRate) *
+                            (parseInt(numberOfTrucks) >= 2 ? 0.65 : 1)
+                          ).toFixed(2)
+                        : "0.00"}{" "}
+                      UAE/km
+                    </span>
+                  </p>
                 </div>
               </div>
             </TabsContent>
-            <TabsContent value="delivery">
+
+            {/* <TabsContent value="delivery">
               <div className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="normalDeliveryRate">
-                    Normal Delivery Price (AED/box)
+                    Normal Delivery Price (UAE/box)
                   </Label>
                   <Input
                     id="normalDeliveryRate"
@@ -110,7 +135,7 @@ export function PricingModal({
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="emergencyDeliveryRate">
-                    Emergency Delivery Price (AED/box)
+                    Emergency Delivery Price (UAE/box)
                   </Label>
                   <Input
                     id="emergencyDeliveryRate"
@@ -123,7 +148,7 @@ export function PricingModal({
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="midnightEmergencyRate">
-                    Midnight Emergency Delivery Price (AED/box)
+                    Midnight Emergency Delivery Price (UAE/box)
                   </Label>
                   <Input
                     id="midnightEmergencyRate"
@@ -135,7 +160,7 @@ export function PricingModal({
                   />
                 </div>
               </div>
-            </TabsContent>
+            </TabsContent> */}
           </Tabs>
 
           <div className="mt-4 flex justify-end gap-2">

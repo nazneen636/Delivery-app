@@ -80,7 +80,7 @@ export default function TableDemo() {
   return (
     <div className="bg-white rounded-[20px] p-7 ">
       <div className="flex justify-between items-center  mb-5 md:mb-0">
-        <h3 className="roboto font-bold text-[32px]">Drivers</h3>
+        <h3 className="roboto font-bold text-[32px]">Order</h3>
 
         <AddBtn onClick={() => setModalOpen(true)} btnText="Add Order" />
       </div>

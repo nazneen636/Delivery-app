@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 import AddBtn from "../common/AddBtn";
 import { OrderModal } from "./OrderModal";
 import CustomDropdown from "./Action";
-import { PricingModal } from "./PricingModal"; // Import the modal
+import { PricingModal } from "./PricingModal"; 
 
 type Invoice = {
   id: number;
@@ -38,8 +38,8 @@ const invoices: Invoice[] = [
     Time: "15:00",
     Phone: "+90345354334",
     Type: "tow-truck",
-    distance: 15, // 15 km
-    price: 15.0, // 15 km × 1 AED/km = 15 AED
+    distance: 15, 
+    price: 15.0, 
   },
   {
     id: 2,
@@ -50,8 +50,8 @@ const invoices: Invoice[] = [
     Phone: "+90345354335",
     Type: "delivery",
     packageType: "normal",
-    boxCount: 2, // 2 boxes
-    price: 50.0, // 2 boxes × 25 AED/box = 50 AED
+    boxCount: 2, 
+    price: 50.0, 
   },
   {
     id: 3,
@@ -62,20 +62,20 @@ const invoices: Invoice[] = [
     Phone: "+90345354336",
     Type: "delivery",
     packageType: "emergency",
-    boxCount: 1, // 1 box
-    price: 50.0, // 1 box × 50 AED/box = 50 AED
+    boxCount: 1, 
+    price: 50.0, 
   },
   {
     id: 4,
     Order: "Ahmed Hassan",
     Address: "Business Bay",
     Date: "Thus, 23-02-2025",
-    Time: "08:00", // Morning time (after midnight)
+    Time: "08:00", 
     Phone: "+90345354337",
     Type: "delivery",
     packageType: "emergency",
-    boxCount: 2, // 2 boxes
-    price: 300.0, // 2 boxes × 150 AED/box = 300 AED (midnight emergency)
+    boxCount: 2, 
+    price: 300.0, 
   },
   {
     id: 5,
@@ -85,8 +85,8 @@ const invoices: Invoice[] = [
     Time: "10:00",
     Phone: "+90345354338",
     Type: "tow-truck",
-    distance: 25, // 25 km
-    price: 25.0, // 25 km × 1 AED/km = 25 AED
+    distance: 25, 
+    price: 25.0,
   },
   {
     id: 6,
@@ -97,8 +97,8 @@ const invoices: Invoice[] = [
     Phone: "+90345354339",
     Type: "delivery",
     packageType: "normal",
-    boxCount: 5, // 5 boxes
-    price: 125.0, // 5 boxes × 25 AED/box = 125 AED
+    boxCount: 5, 
+    price: 125.0, 
   },
 ];
 
@@ -106,15 +106,15 @@ export default function TableDemo() {
   const [modalOpen, setModalOpen] = useState(false);
   const [pricingModalOpen, setPricingModalOpen] = useState(false);
 
-  // getPriceDetails function
+
   const getPriceDetails = (invoice: Invoice) => {
     const boxPrice = invoice.packageType === "normal" ? 25.0 : 50.0;
     const totalPrice = boxPrice * (invoice.boxCount || 1);
 
     if (invoice.Type === "tow-truck") {
-      return `${invoice.price.toFixed(2)} (AED ${
+      return `${invoice.price.toFixed(2)} (UAE ${
         invoice.distance
-      } km × AED 1.00/km)`;
+      } km × UAE 1.00/km)`;
     } else {
       const [hour] = invoice.Time.split(":").map(Number);
       const isEmergencyAfterMidnight =
@@ -124,7 +124,7 @@ export default function TableDemo() {
       }
       return `${totalPrice.toFixed(2)} (${
         invoice.boxCount || 1
-      } box(es) × AED ${boxPrice} per box)`;
+      } box(es) × UAE ${boxPrice} per box)`;
     }
   };
 
@@ -155,7 +155,7 @@ export default function TableDemo() {
             normalDeliveryRate: 25.0,
             emergencyDeliveryRate: 50.0,
             midnightEmergencyRate: 150.0,
-          }} // Provide appropriate initial prices
+          }} 
           onSave={() => {
             // Handle save logic here
           }}
@@ -171,7 +171,7 @@ export default function TableDemo() {
             <TableHead>Time</TableHead>
             <TableHead>Phone</TableHead>
             <TableHead>Type</TableHead>
-            <TableHead>Price (AED)</TableHead>
+            <TableHead>Price (UAE)</TableHead>
             <TableHead>Action</TableHead>
           </TableRow>
         </TableHeader>

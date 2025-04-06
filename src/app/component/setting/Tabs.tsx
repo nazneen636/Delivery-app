@@ -1,5 +1,7 @@
 "use client";
 import { Input } from "@/components/ui/input";
+import type React from "react";
+
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
@@ -14,7 +16,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Upload } from "lucide-react";
+import { ChevronDownIcon, Upload } from "lucide-react";
+import { toast } from "sonner";
+import { Toaster } from "@/components/ui/sonner";
+
 type EmployerType = "webAdmin" | "towTruck" | "delivery";
 
 interface DocumentUpload {
@@ -22,10 +27,35 @@ interface DocumentUpload {
   driversLicense?: string;
   companyLicense?: string;
 }
+
+interface ProfileFormData {
+  fullName: string;
+  email: string;
+  phone: string;
+  employeeId: string;
+  bio: string;
+  employerType: EmployerType;
+  profileImage: string | null;
+}
+
 export default function ProfileSettings() {
-  const [employerType, setEmployerType] = useState<EmployerType>("webAdmin");
+  // Profile form state
+  const [profileData, setProfileData] = useState<ProfileFormData>({
+    fullName: "",
+    email: "",
+    phone: "",
+    employeeId: "",
+    bio: "",
+    employerType: "webAdmin",
+    profileImage: null,
+  });
+
+  // UI state
+  const [isProfileLoading, setIsProfileLoading] = useState(false);
+  const [isDocumentsLoading, setIsDocumentsLoading] = useState(false);
   const [documents, setDocuments] = useState<DocumentUpload>({});
-  const [profileImage, setProfileImage] = useState<string | null>(null);
+
+  // Refs for file inputs
   const fileInputRef = useRef<HTMLInputElement>(null);
   const documentRefs = {
     passport: useRef<HTMLInputElement>(null),
@@ -33,12 +63,17 @@ export default function ProfileSettings() {
     companyLicense: useRef<HTMLInputElement>(null),
   };
 
+  // Handle profile image upload
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        setProfileImage(e.target?.result as string);
+        const result = e.target?.result as string;
+        setProfileData((prev) => ({
+          ...prev,
+          profileImage: result,
+        }));
       };
       reader.readAsDataURL(file);
     }
@@ -47,6 +82,8 @@ export default function ProfileSettings() {
   const handleUploadClick = () => {
     fileInputRef.current?.click();
   };
+
+  // Handle document uploads
   const handleDocumentUpload =
     (type: keyof DocumentUpload) =>
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -62,9 +99,125 @@ export default function ProfileSettings() {
         reader.readAsDataURL(file);
       }
     };
+
+  // Handle form input changes
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { id, value } = e.target;
+    setProfileData((prev) => ({
+      ...prev,
+      [id]: value,
+    }));
+  };
+
+  // Handle employer type change
+  const handleEmployerTypeChange = (value: EmployerType) => {
+    setProfileData((prev) => ({
+      ...prev,
+      employerType: value,
+    }));
+  };
+
+  // Reset profile form
+  const handleResetProfile = () => {
+    setProfileData({
+      fullName: "",
+      email: "",
+      phone: "",
+      employeeId: "",
+      bio: "",
+      employerType: "webAdmin",
+      profileImage: null,
+    });
+
+    toast.success("Form Reset", {
+      description: "Your profile form has been reset.",
+    });
+  };
+
+  // Reset documents
+  const handleResetDocuments = () => {
+    setDocuments({});
+
+    toast.success("Documents Reset", {
+      description: "Your documents have been reset.",
+    });
+  };
+
+  // Update profile
+  const handleUpdateProfile = async () => {
+    setIsProfileLoading(true);
+
+    try {
+      // Validate form
+      if (!profileData.fullName || !profileData.email || !profileData.phone) {
+        throw new Error("Please fill in all required fields.");
+      }
+
+      // Simulate API call - replace with actual API integration
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      // In a real app, you would send the data to your API
+      // const response = await fetch("/api/profile", {
+      //   method: "POST",
+      //   headers: { "Content-Type": "application/json" },
+      //   body: JSON.stringify(profileData)
+      // });
+      //
+      // if (!response.ok) {
+      //   throw new Error("Failed to update profile");
+      // }
+
+      toast.success("Profile Updated", {
+        description: "Your profile has been successfully updated.",
+      });
+    } catch (error) {
+      toast.error("Error", {
+        description:
+          error instanceof Error ? error.message : "An error occurred",
+      });
+    } finally {
+      setIsProfileLoading(false);
+    }
+  };
+
+  // Save documents
+  const handleSaveDocuments = async () => {
+    setIsDocumentsLoading(true);
+
+    try {
+      if (profileData.employerType === "towTruck") {
+        if (
+          !documents.passport ||
+          !documents.driversLicense ||
+          !documents.companyLicense
+        ) {
+          throw new Error("Please upload all required documents.");
+        }
+      } else if (!documents.passport) {
+        throw new Error("Please upload your passport.");
+      }
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      toast.success("Documents Saved", {
+        description: "Your documents have been successfully saved.",
+      });
+    } catch (error) {
+      toast.error("Error", {
+        description:
+          error instanceof Error ? error.message : "An error occurred",
+      });
+    } finally {
+      setIsDocumentsLoading(false);
+    }
+  };
+
   return (
     <div className="pb-5 -mx-2 md:mx-0">
-      <div className=" w-full pt-10 pb-2 px-2 md:px-6 bg-white rounded-[10px] shadow-md">
+      {/* Add Sonner Toaster component */}
+      <Toaster />
+
+      <div className="w-full pt-10 pb-2 px-2 md:px-6 bg-white rounded-[10px] shadow-md">
         <Tabs defaultValue="account">
           <TabsList className="flex pb-1 relative">
             <TabsTrigger
@@ -77,21 +230,8 @@ export default function ProfileSettings() {
               value="documents"
               className="md:px-4 py-2 font-medium text-xs md:text-sm relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-[#E0E4EC] data-[state=active]:after:bg-orange data-[state=active]:text-orange data-[state=active]:shadow-none border-0"
             >
-              {/* Login & Security */}
               Documents
             </TabsTrigger>
-            {/* <TabsTrigger
-              value="notifications"
-              className="md:px-4 py-2 font-medium text-xs md:text-sm relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-[#E0E4EC] data-[state=active]:shadow-none data-[state=active]:after:bg-orange data-[state=active]:text-orange border-0"
-            >
-              Notifications
-            </TabsTrigger>
-            <TabsTrigger
-              value="interface"
-              className="md:px-4 py-2 font-medium text-xs md:text-sm relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-[#E0E4EC] data-[state=active]:after:bg-orange data-[state=active]:text-orange data-[state=active]:shadow-none border-0"
-            >
-              Interface
-            </TabsTrigger> */}
           </TabsList>
 
           <TabsContent value="account">
@@ -113,13 +253,13 @@ export default function ProfileSettings() {
                       />
 
                       {/* Profile image display */}
-                      {profileImage ? (
+                      {profileData.profileImage ? (
                         <div
                           onClick={handleUploadClick}
                           className="w-32 h-32 border-2 border-dashed border-[#E0E4EC] rounded-lg flex flex-col items-center justify-center cursor-pointer hover:border-orange transition-colors"
                         >
                           <Image
-                            src={profileImage || "/placeholder.svg"}
+                            src={profileData.profileImage || "/placeholder.svg"}
                             alt="Profile"
                             width={300}
                             height={300}
@@ -157,12 +297,13 @@ export default function ProfileSettings() {
                       Employer Type
                     </Label>
                     <Select
-                      value={employerType || undefined}
+                      value={profileData.employerType}
                       onValueChange={(value: EmployerType) =>
-                        setEmployerType(value)
+                        handleEmployerTypeChange(value)
                       }
                     >
-                      <SelectTrigger className="w-full">
+                      <SelectTrigger className="w-full relative appearance-none">
+                        <ChevronDownIcon className="text-[#4C535F] absolute right-[12px] " />
                         <SelectValue placeholder="Select employer type" />
                       </SelectTrigger>
                       <SelectContent>
@@ -183,12 +324,17 @@ export default function ProfileSettings() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
                   <div className="space-y-3">
                     <Label
-                      htmlFor="fullname"
+                      htmlFor="fullName"
                       className="font-medium text-base text-[#4C535F]"
                     >
                       Full name
                     </Label>
-                    <Input placeholder="Enter your full name" id="fullname" />
+                    <Input
+                      id="fullName"
+                      placeholder="Enter your full name"
+                      value={profileData.fullName}
+                      onChange={handleInputChange}
+                    />
                   </div>
                   <div className="space-y-3">
                     <Label
@@ -198,9 +344,11 @@ export default function ProfileSettings() {
                       Email
                     </Label>
                     <Input
+                      id="email"
                       type="email"
                       placeholder="Enter your email"
-                      id="email"
+                      value={profileData.email}
+                      onChange={handleInputChange}
                     />
                   </div>
                   <div className="space-y-3">
@@ -211,77 +359,64 @@ export default function ProfileSettings() {
                       Phone number
                     </Label>
                     <Input
+                      id="phone"
                       type="tel"
                       placeholder="Enter your phone number"
-                      id="phone"
+                      value={profileData.phone}
+                      onChange={handleInputChange}
                     />
                   </div>
                   <div className="space-y-3">
                     <Label
-                      htmlFor="username"
+                      htmlFor="employeeId"
                       className="font-medium text-base text-[#4C535F]"
                     >
                       Employee ID
                     </Label>
-                    <Input placeholder="Enter your employee ID" id="username" />
+                    <Input
+                      id="employeeId"
+                      placeholder="Enter your employee ID"
+                      value={profileData.employeeId}
+                      onChange={handleInputChange}
+                    />
                   </div>
                 </div>
 
                 <div className="space-y-3">
                   <Label
-                    htmlFor="fullname"
+                    htmlFor="bio"
                     className="font-medium text-base text-[#4C535F]"
                   >
                     Bio
                   </Label>
                   <Textarea
+                    id="bio"
                     placeholder="Write your Bio here e.g. hobbies, interests, etc."
                     className="mb-4 h-[158px]"
+                    value={profileData.bio}
+                    onChange={handleInputChange}
                   />
                 </div>
                 <div className="flex gap-4 mt-6">
-                  <Button className="bg-orange hover:bg-transparent border border-transparent hover:border-orange text-white hover:text-orange">
-                    Update Profile
+                  <Button
+                    onClick={handleUpdateProfile}
+                    disabled={isProfileLoading}
+                    className="bg-orange hover:bg-transparent border border-transparent hover:border-orange text-white hover:text-orange"
+                  >
+                    {isProfileLoading ? "Updating..." : "Update Profile"}
                   </Button>
-                  <Button className="bg-orange hover:bg-transparent border border-transparent hover:border-orange text-white hover:text-orange">
+                  <Button
+                    onClick={handleResetProfile}
+                    disabled={isProfileLoading}
+                    className="bg-orange hover:bg-transparent border border-transparent hover:border-orange text-white hover:text-orange"
+                  >
                     Reset
                   </Button>
                 </div>
               </CardContent>
             </Card>
           </TabsContent>
-          {/* <TabsContent value="login">
-            <Card className=" p-6">
-              <CardContent>
-                <div className="flex flex-col gap-6 mb-4">
-                  <div className="space-y-3">
-                    <Label
-                      htmlFor="email"
-                      className="font-medium text-base text-[#4C535F]"
-                    >
-                      Email
-                    </Label>
-                    <Input type="email" placeholder="Email" id="email" />
-                  </div>
-                  <div className="space-y-3">
-                    <Label
-                      htmlFor="username"
-                      className="font-medium text-base text-[#4C535F]"
-                    >
-                      Username
-                    </Label>
-                    <Input placeholder="Username" id="username" />
-                  </div>
-                </div>
 
-                <div className="flex gap-4 mt-6">
-                  <Button className="bg-orange hover:bg-transparent border border-transparent hover:border-orange text-white hover:text-orange">
-                    Login
-                  </Button>                  
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent> */}
           <TabsContent value="documents">
             <Card>
               <CardContent className="space-y-6">
@@ -319,30 +454,30 @@ export default function ProfileSettings() {
                   </div>
 
                   {/* Additional documents for Tow Truck Drivers */}
-                  {employerType === "towTruck" && (
+                  {profileData.employerType === "towTruck" && (
                     <>
                       <div className="space-y-2">
                         <Label className="text-sm font-semibold text-gray-500">
-                          Drivers `&lsquo;` License
+                          Driver&apos;s License
                         </Label>
                         <div
                           onClick={() =>
                             documentRefs.driversLicense.current?.click()
                           }
-                          className="border-2 border-dashed rounded-lg py-2 px-4  cursor-pointer hover:border-orange transition-colors text-sm"
+                          className="border-2 border-dashed rounded-lg py-2 px-4 cursor-pointer hover:border-orange transition-colors text-sm"
                         >
                           {documents.driversLicense ? (
                             <div className="flex items-center space-x-2">
                               <Upload className="w-5 h-5 text-green-500" />
                               <span className="text-green-500">
-                                Driver`&lsquo;`s License uploaded successfully
+                                Driver&apos;s License uploaded successfully
                               </span>
                             </div>
                           ) : (
                             <div className="flex items-center space-x-2">
                               <Upload className="w-5 h-5 text-gray-400" />
                               <span className="text-gray-500">
-                                Upload driver`&lsquo;`s license
+                                Upload driver&apos;s license
                               </span>
                             </div>
                           )}
@@ -364,7 +499,7 @@ export default function ProfileSettings() {
                           onClick={() =>
                             documentRefs.companyLicense.current?.click()
                           }
-                          className="border-2 border-dashed rounded-lg py-2 px-4  cursor-pointer hover:border-orange transition-colors text-sm"
+                          className="border-2 border-dashed rounded-lg py-2 px-4 cursor-pointer hover:border-orange transition-colors text-sm"
                         >
                           {documents.companyLicense ? (
                             <div className="flex items-center space-x-2">
@@ -395,10 +530,18 @@ export default function ProfileSettings() {
                 </div>
 
                 <div className="flex gap-4">
-                  <Button className="bg-orange hover:bg-orange/90 text-white">
-                    Save Documents
+                  <Button
+                    onClick={handleSaveDocuments}
+                    disabled={isDocumentsLoading}
+                    className="bg-orange hover:bg-orange/90 text-white"
+                  >
+                    {isDocumentsLoading ? "Saving..." : "Save Documents"}
                   </Button>
-                  <Button className="bg-orange hover:bg-orange/90 text-white">
+                  <Button
+                    onClick={handleResetDocuments}
+                    disabled={isDocumentsLoading}
+                    className="bg-orange hover:bg-orange/90 text-white"
+                  >
                     Reset
                   </Button>
                 </div>

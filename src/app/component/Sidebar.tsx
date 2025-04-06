@@ -47,12 +47,15 @@ const Sidebar = () => {
       <ul className="flex md:flex-col md:gap-8 items-center justify-between md:justify-center h-full">
         {items.map((item) => (
           <li
-            className={`px-[17px] md:py-[14px] py-2 rounded-[8px] hover:bg-orange duration-300 transition-all ${
+            className={`rounded-[8px] hover:bg-orange duration-300 transition-all ${
               pathName === item.link ? "bg-orange" : ""
             }`}
             key={item.id}
           >
-            <Link href={item.link} className="text-white text-2xl">
+            <Link
+              href={item.link}
+              className="text-white text-2xl block px-[17px] md:py-[14px] py-2 rounded-[8px]"
+            >
               {item.icon}
             </Link>
           </li>
